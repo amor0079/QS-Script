@@ -43,6 +43,34 @@ def show():
         sm_colour = "multi-color"
     up_sm_colour = sm_colour.upper()
 
+    if int(re.sub('[a-zA-Z]','',colour_len)[-1])/ 2 ==0:
+        jixing = 'Multiplex  Common  Anode'
+    else:
+        jixing = 'Multiplex  Common  Cathode'
+
+    # colour = {'G':'Yellow Green','M':'Super Bright Yellow Green','Y':'Yellow','T':'Super Bright Yellow','R':'Red',
+    #           'S':'Super Bright Red','D':'Super Bright Red','W':'Super Bright Red','E':'Oright',
+    #           'Q':'Super Bright Orange',
+    #           'B':'Super Bright Blue','A':'Super Bright Amber','V':'Super Bright Green','X':'Super Bright Green',
+    #           'C':'Super Bright White'
+    #           }
+    #
+    # k =re.sub('[a-zA-Z]', '', colour_len)
+    # for key in colour.keys():
+    #     if k[0] == key:
+    #         co1= colour[key]
+    #     elif k[1] ==key:
+    #         co2= colour[key]
+
+    #
+                # elif len(re.sub('[^a-zA-Z]', '', colour_len)) == 3:
+                #     for key in colour:
+                #         if re.sub('[a-zA-Z]','',colour_len)[0] == key:
+                #             colour_1 = colour[key]
+                #         if re.sub('[a-zA-Z]','',colour_len)[1] ==key:
+                #             colour_2 = colour[key]
+                #         if re.sub('[a-zA-Z]','',colour_len)[2] ==key:
+                #             colour_3 = colour[key]
 
     cust_1 = {'name':e1.get(),
               'date1':'{:%B %d,%Y}'.format(date.today()),
@@ -53,6 +81,9 @@ def show():
               'length':e5.get(),
               'n_colour':sm_colour,
               'up_sm_colour':up_sm_colour,
+              'jixing':jixing,
+              # 'colour_1':co1,
+              # 'Colour_2':co2
 
               }
     document.merge_pages([cust_1])
