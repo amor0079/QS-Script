@@ -53,8 +53,9 @@ a = []
 def show():
     for var in v:
         a.append(var.get())
-    print(a)
-    # template0_ELB = r"C:\Users\win\Desktop\GUI_TJP_script"
+
+    #模板文档
+    template0_ELB = r"C:\Users\win\Desktop\GUI_TJP_script\tem\ELB_template.docx"
     # # template1_ELCK =
     # #     # template2_ELF =
     # #     # template3_ELM =
@@ -72,27 +73,20 @@ def show():
     # #     # template15_PCB =
     # #     # template16_ELPF =
     #
-    # #主判断
-    # if a[0] ==1:
-    #     document0 =MailMerge(template)
-    #     cust_1 = {'name': 1, #需修改读入
-    #               'date1': '{:%B %d,%Y}'.format(date.today()),
-    #               'date2': '{:%Y-%m-%d}'.format(date.today()),
-    #               # 'spec_no': e2.get(),
-    #               # 'engineer': e3.get(),
-    #               # 'wide': e4.get(),
-    #               # 'length': e5.get(),
-    #               # 'n_colour': sm_colour,
-    #               # 'up_sm_colour': up_sm_colour,
-    #               # 'jixing': jixing,
-    #               }
-    #     document0.merge_pages([cust_1])
-    #     # print(document.get_merge_fields())
-    #     document.write("./{}.docx".format(12)) #需修改
-    #     # e1.delete(0, END)
+    #主判断
+    if a[0] ==1:
+         document =MailMerge(template0_ELB)
+         cust_1 = {'name': '1', #需修改读入
+                   'time': '{:%B %d,%Y}'.format(date.today()),
+                   'pack_name': '{:%Y-%m-%d}'.format(date.today()),
+                   'bianhao': '12342',
+                   'custom_code': '123'
+                   }
+         document.merge_pages([cust_1])
+         # print(document.get_merge_fields()) 调试代码
+         document.write("./{}.docx".format(12)) #需修改
 
-
-
+#Button setting
 Button(root, text = "确认输出文档", width = 10, command = show)\
             .pack(side='left', padx = 10, pady = 5)
 
