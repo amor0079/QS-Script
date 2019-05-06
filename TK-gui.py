@@ -56,9 +56,9 @@ def show():
 
     #模板文档
     template0_ELB = r"C:\Users\win\Desktop\GUI_TJP_script\tem\ELB_template.docx"
-    # # template1_ELCK =
-    # #     # template2_ELF =
-    # #     # template3_ELM =
+    template1_ELCK = r"C:\Users\win\Desktop\GUI_TJP_script\tem\ELCK_template.docx"
+    template2_ELF = r"C:\Users\win\Desktop\GUI_TJP_script\tem\ELF_template.docx"
+    template3_ELM = r"C:\Users\win\Desktop\GUI_TJP_script\tem\ELM_template.docx"
     # #     # template4_ELN =
     # #     # template5_ELP =
     # #     # template6_ELQC =
@@ -75,16 +75,28 @@ def show():
     #
     #主判断
     if a[0] ==1:
-         document =MailMerge(template0_ELB)
+         document0 =MailMerge(template0_ELB)
          cust_1 = {'name': '1', #需修改读入
                    'time': '{:%B %d,%Y}'.format(date.today()),
                    'pack_name': '{:%Y-%m-%d}'.format(date.today()),
                    'bianhao': '12342',
                    'custom_code': '123'
                    }
-         document.merge_pages([cust_1])
+         document0.merge_pages([cust_1])
          # print(document.get_merge_fields()) 调试代码
-         document.write("./{}.docx".format(12)) #需修改
+         document0.write("./{}.docx".format(12)) #需修改
+    if a[1] ==1:
+         document1 =MailMerge(template0_ELB)
+         cust_1 = {'name': '1', #需修改读入
+                   'time': '{:%B %d,%Y}'.format(date.today()),
+                   'pack_name': '{:%Y-%m-%d}'.format(date.today()),
+                   'bianhao': '12342',
+                   'custom_code': '123'
+                   }
+         document1.merge_pages([cust_1])
+         # print(document.get_merge_fields()) 调试代码
+         document1.write("./{}.docx".format(12)) #需修改
+
 
 #Button setting
 Button(root, text = "确认输出文档", width = 10, command = show)\
