@@ -11,8 +11,11 @@ from tkinter import *
 from tkinter import messagebox
 from mailmerge import MailMerge
 from datetime import date
+import xlrd
 
 root = Tk()
+root.title('ZBOE条件票自动脚本--Design by Amor')
+root.iconbitmap('./icon.ico')
 group = LabelFrame(root, text = '请选择要输出的条件票', padx = 30, pady = 30)
 group.pack(padx = 10, pady = 10)
 
@@ -47,6 +50,17 @@ for long in LANGS:
                         )
     b.pack(anchor = W)
 
+
+excel_path = r'.\ID_table.xlsx'
+def read_excel():
+    workbook = xlrd.open_workbook(excel_path)
+    sheet1 =  sheet1= workbook.sheet_by_name(u'Sheet1')
+    nrows = sheet1.nrows
+    ncols = sheet1.ncols
+    global Pro_name
+    Pro_name = sheet1.cell(2, 1).value
+
+read_excel()
 #将选择添加进一个列表
 a = []
 #定义主逻辑
@@ -55,10 +69,10 @@ def show():
         a.append(var.get())
 
     #模板文档
-    template0_ELB = r"C:\Users\win\Desktop\GUI_TJP_script\tem\ELB_template.docx"
-    template1_ELCK = r"C:\Users\win\Desktop\GUI_TJP_script\tem\ELCK_template.docx"
-    template2_ELF = r"C:\Users\win\Desktop\GUI_TJP_script\tem\ELF_template.docx"
-    template3_ELM = r"C:\Users\win\Desktop\GUI_TJP_script\tem\ELM_template.docx"
+    template0_ELB = r".\tem\ELB_template.docx"
+    template1_ELCK = r".\ELCK_template.docx"
+    template2_ELF = r".\tem\ELF_template.docx"
+    template3_ELM = r".\tem\ELM_template.docx"
     # #     # template4_ELN =
     # #     # template5_ELP =
     # #     # template6_ELQC =
@@ -76,7 +90,7 @@ def show():
     #主判断
     if a[0] ==1:
          document0 =MailMerge(template0_ELB)
-         cust_1 = {'name': '1', #需修改读入
+         cust_1 = {'name': Pro_name,
                    'time': '{:%B %d,%Y}'.format(date.today()),
                    'pack_name': '{:%Y-%m-%d}'.format(date.today()),
                    'bianhao': '12342',
@@ -84,7 +98,7 @@ def show():
                    }
          document0.merge_pages([cust_1])
          # print(document.get_merge_fields()) 调试代码
-         document0.write("./{}.docx".format(12)) #需修改
+         document0.write("./{}.docx".format(Pro_name)) #需修改
     if a[1] ==1:
          document1 =MailMerge(template0_ELB)
          cust_1 = {'name': '1', #需修改读入
