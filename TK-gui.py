@@ -57,8 +57,27 @@ def read_excel():
     sheet1 =  sheet1= workbook.sheet_by_name(u'Sheet1')
     nrows = sheet1.nrows
     ncols = sheet1.ncols
-    global Pro_name
+    global Pro_name,tjp_unm,cus_num,ref_name,ref_ink,ref_sup,ref_texture,pcb_name,\
+           pcb_sup,pin_name,pin_head,pin_head,film_name,film_sup,chip_name,easy_tape,\
+           easy_sup,in_pack,out_pack
+    tjp_unm = sheet1.cell(1, 1).value
     Pro_name = sheet1.cell(2, 1).value
+    cus_num = sheet1.cell(3, 1).value
+    ref_name = sheet1.cell(4, 1).value
+    ref_sup = sheet1.cell(4, 3).value
+    ref_ink = sheet1.cell(5, 1).value
+    ref_texture = sheet1.cell(5, 3).value
+    pcb_name = sheet1.cell(6, 1).value
+    pcb_sup = sheet1.cell(6, 3).value
+    pin_name = sheet1.cell(7, 1).value
+    pin_head = sheet1.cell(7, 3).value
+    film_name = sheet1.cell(8, 1).value
+    film_sup = sheet1.cell(8, 3).value
+    chip_name = sheet1.cell(9, 1).value
+    easy_tape = sheet1.cell(10, 1).value
+    easy_sup = sheet1.cell(10, 3).value
+    in_pack = sheet1.cell(11, 1).value
+    out_pack = sheet1.cell(11, 1).value
 
 read_excel()
 #将选择添加进一个列表
