@@ -106,8 +106,8 @@ def show():
     # #     # template15_PCB =
     # #     # template16_ELPF =
     #
-    #主判断
-    if a[0] ==1:
+    #主判断逻辑
+    if a[0] ==1: #ELB
          document0 =MailMerge(template0_ELB)
          cust_1 = {'name': Pro_name,
                    'time': '{:%B %d,%Y}'.format(date.today()),
@@ -118,7 +118,7 @@ def show():
          document0.merge_pages([cust_1])
          # print(document.get_merge_fields()) 调试代码
          document0.write("./{}.docx".format(Pro_name)) #需修改
-    if a[1] ==1:
+    if a[1] ==1: #ELCK
          document1 =MailMerge(template0_ELB)
          cust_1 = {'name': '1', #需修改读入
                    'time': '{:%B %d,%Y}'.format(date.today()),
@@ -128,6 +128,170 @@ def show():
                    }
          document1.merge_pages([cust_1])
          # print(document.get_merge_fields()) 调试代码
+         document1.write("./{}.docx".format(12)) #需修改
+    if a[2] ==1: #ELF
+         document1 =MailMerge(template0_ELB)
+         cust_1 = {'name': '1', #需修改读入
+                   'time': '{:%B %d,%Y}'.format(date.today()),
+                   'pack_name': '{:%Y-%m-%d}'.format(date.today()),
+                   'bianhao': '12342',
+                   'custom_code': '123'
+                   }
+         document1.merge_pages([cust_1])
+         # print(document.get_merge_fields()) 调试代码
+         document1.write("./{}.docx".format(12)) #需修改
+    if a[3] ==1: #ELM
+         document1 =MailMerge(template0_ELB)
+         cust_1 = {'name': '1', #需修改读入
+                   'time': '{:%B %d,%Y}'.format(date.today()),
+                   'pack_name': '{:%Y-%m-%d}'.format(date.today()),
+                   'bianhao': '12342',
+                   'custom_code': '123'
+                   }
+         document1.merge_pages([cust_1])
+         # print(document.get_merge_fields()) 调试代码
+         document1.write("./{}.docx".format(12)) #需修改
+    if a[4] ==1: #ELN
+         document1 =MailMerge(template0_ELB)
+         cust_1 = {'name': '1', #需修改读入
+                   'time': '{:%B %d,%Y}'.format(date.today()),
+                   'pack_name': '{:%Y-%m-%d}'.format(date.today()),
+                   'bianhao': '12342',
+                   'custom_code': '123'
+                   }
+         document1.merge_pages([cust_1])
+         # print(document.get_merge_fields()) 调试代码
+         document1.write("./{}.docx".format(12)) #需修改
+    if a[5] ==1: #ELP
+         document1 =MailMerge(template0_ELB)
+         cust_1 = {'name': '1', #需修改读入
+                   'time': '{:%B %d,%Y}'.format(date.today()),
+                   'pack_name': '{:%Y-%m-%d}'.format(date.today()),
+                   'bianhao': '12342',
+                   'custom_code': '123'
+                   }
+         document1.merge_pages([cust_1])
+         # print(document.get_merge_fields()) 调试代码
+         document1.write("./{}.docx".format(12)) #需修改
+    if a[6] ==1: #ELQC
+         document1 =MailMerge(template0_ELB)
+         cust_1 = {'name': '1', #需修改读入
+                   'time': '{:%B %d,%Y}'.format(date.today()),
+                   'pack_name': '{:%Y-%m-%d}'.format(date.today()),
+                   'bianhao': '12342',
+                   'custom_code': '123'
+                   }
+         document1.merge_pages([cust_1])
+         # print(document.get_merge_fields()) 调试代码
+         document1.write("./{}.docx".format(12)) #需修改
+    if a[7] ==1: #ELW
+         document1 =MailMerge(template0_ELB)
+         cust_1 = {'name': '1', #需修改读入
+                   'time': '{:%B %d,%Y}'.format(date.today()),
+                   'pack_name': '{:%Y-%m-%d}'.format(date.today()),
+                   'bianhao': '12342',
+                   'custom_code': '123'
+                   }
+         document1.merge_pages([cust_1])
+         # print(document.get_merge_fields()) 调试代码
+         document1.write("./{}.docx".format(12)) #需修改
+    if a[8] ==1: #ELHC
+         document1 =MailMerge(template0_ELB)
+         cust_1 = {'name': '1', #需修改读入
+                   'time': '{:%B %d,%Y}'.format(date.today()),
+                   'pack_name': '{:%Y-%m-%d}'.format(date.today()),
+                   'bianhao': '12342',
+                   'custom_code': '123'
+                   }
+         document1.merge_pages([cust_1])
+         # print(document.get_merge_fields()) 调试代码
+         document1.write("./{}.docx".format(12)) #需修改
+    if a[9] ==1: #ELSMT
+         document1 =MailMerge(template0_ELB)
+         cust_1 = {'name': '1', #需修改读入
+                   'time': '{:%B %d,%Y}'.format(date.today()),
+                   'pack_name': '{:%Y-%m-%d}'.format(date.today()),
+                   'bianhao': '12342',
+                   'custom_code': '123'
+                   }
+         document1.merge_pages([cust_1])
+         # print(document.get_merge_fields()) 调试代码
+         document1.write("./{}.docx".format(12)) #需修改
+    if a[10] ==1: #ELT
+         document1 =MailMerge(template0_ELB)
+         cust_1 = {'name': '1', #需修改读入
+                   'time': '{:%B %d,%Y}'.format(date.today()),
+                   'pack_name': '{:%Y-%m-%d}'.format(date.today()),
+                   'bianhao': '12342',
+                   'custom_code': '123'
+                   }
+         document1.merge_pages([cust_1])
+         # print(document.get_merge_fields()) 调试代码
+         document1.write("./{}.docx".format(12)) #需修改
+    if a[11] ==1: #ELY
+         document1 =MailMerge(template0_ELB)
+         cust_1 = {'name': '1', #需修改读入
+                   'time': '{:%B %d,%Y}'.format(date.today()),
+                   'pack_name': '{:%Y-%m-%d}'.format(date.today()),
+                   'bianhao': '12342',
+                   'custom_code': '123'
+                   }
+         document1.merge_pages([cust_1])
+         # print(document.get_merge_fields()) 调试代码
+         document1.write("./{}.docx".format(12)) #需修改
+    if a[12] ==1: #ELFIL_H
+         document1 =MailMerge(template0_ELB)
+         cust_1 = {'name': '1', #需修改读入
+                   'time': '{:%B %d,%Y}'.format(date.today()),
+                   'pack_name': '{:%Y-%m-%d}'.format(date.today()),
+                   'bianhao': '12342',
+                   'custom_code': '123'
+                   }
+         document1.merge_pages([cust_1])
+         # print(document.get_merge_fields()) 调试代码
+         document1.write("./{}.docx".format(12)) #需修改
+    if a[13] ==1: #ELFIL_X
+         document1 =MailMerge(template0_ELB)
+         cust_1 = {'name': '1', #需修改读入
+                   'time': '{:%B %d,%Y}'.format(date.today()),
+                   'pack_name': '{:%Y-%m-%d}'.format(date.today()),
+                   'bianhao': '12342',
+                   'custom_code': '123'
+                   }
+         document1.merge_pages([cust_1])
+         # print(document.get_merge_fields()) 调试代码
+         document1.write("./{}.docx".format(12)) #需修改
+    if a[14] ==1: #ELREF
+         document1 =MailMerge(template0_ELB)
+         cust_1 = {'name': '1', #需修改读入
+                   'time': '{:%B %d,%Y}'.format(date.today()),
+                   'pack_name': '{:%Y-%m-%d}'.format(date.today()),
+                   'bianhao': '12342',
+                   'custom_code': '123'
+                   }
+         document1.merge_pages([cust_1])
+         # print(document.get_merge_fields()) 调试代码
+         document1.write("./{}.docx".format(12)) #需修改
+    if a[15] ==1: #ELPCB
+         document1 =MailMerge(template0_ELB)
+         cust_1 = {'name': '1', #需修改读入
+                   'time': '{:%B %d,%Y}'.format(date.today()),
+                   'pack_name': '{:%Y-%m-%d}'.format(date.today()),
+                   'bianhao': '12342',
+                   'custom_code': '123'
+                   }
+         document1.merge_pages([cust_1])
+         # print(document.get_merge_fields()) 调试代码
+         document1.write("./{}.docx".format(12)) #需修改
+    if a[16] ==1: #ELPF
+         document1 =MailMerge(template0_ELB)
+         cust_1 = {'name': '1', #需修改读入
+                   'time': '{:%B %d,%Y}'.format(date.today()),
+                   'pack_name': '{:%Y-%m-%d}'.format(date.today()),
+                   'bianhao': '12342',
+                   'custom_code': '123'
+                   }
+         document1.merge_pages([cust_1])
          document1.write("./{}.docx".format(12)) #需修改
 
 
