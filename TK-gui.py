@@ -54,13 +54,13 @@ for long in LANGS:
 excel_path = r'.\ID_table.xlsx'
 def read_excel():
     workbook = xlrd.open_workbook(excel_path)
-    sheet1 =  sheet1= workbook.sheet_by_name(u'Sheet1')
+    sheet1= workbook.sheet_by_name(u'Sheet1')
     nrows = sheet1.nrows
     ncols = sheet1.ncols
-    global Pro_name,tjp_unm,cus_num,ref_name,ref_ink,ref_sup,ref_texture,pcb_name,\
+    global Pro_name,tjp_num,cus_num,ref_name,ref_ink,ref_sup,ref_texture,pcb_name,\
            pcb_sup,pin_name,pin_head,pin_head,film_name,film_sup,chip_name,easy_tape,\
            easy_sup,in_pack,out_pack
-    tjp_unm = sheet1.cell(1, 1).value
+    tjp_num = sheet1.cell(1, 1).value
     Pro_name = sheet1.cell(2, 1).value
     cus_num = sheet1.cell(3, 1).value
     ref_name = sheet1.cell(4, 1).value
@@ -96,13 +96,13 @@ def show():
     # #     # template5_ELP =
     # #     # template6_ELQC =
     # #     # template7_ELW =
-    # #     # template8_ELHC =
+    template8_ELHC = r".\tem\ELHC_template.docx"
     # #     # template9_ELSMT =
     # #     # template10_ELT =
     # #     # template11_ELY =
-    # #     # template12_FIL_H =
-    # #     # template13_FIL_X =
-    # #     # template14_REF =
+    template12_FIL_H = r".\tem\ELFIL_film_h.docx"
+    template13_FIL_X = r".\tem\ELFIL_film_x.docx"
+    # template14_REF =
     # #     # template15_PCB =
     # #     # template16_ELPF =
     #
@@ -110,19 +110,19 @@ def show():
     if a[0] ==1: #ELB
          document0 =MailMerge(template0_ELB)
          cust_1 = {'name': Pro_name,
+                   'bianhao': str(tjp_num),
+                   'custom_code': str(cus_num),
                    'time': '{:%B %d,%Y}'.format(date.today()),
-                   'pack_name': '{:%Y-%m-%d}'.format(date.today()),
-                   'bianhao': '12342',
-                   'custom_code': '123'
+                   'pack_name': str(in_pack),
                    }
          document0.merge_pages([cust_1])
          # print(document.get_merge_fields()) 调试代码
-         document0.write("./{}.docx".format(Pro_name)) #需修改
+         document0.write("./ELB{}-{}.docx".format(tjp_num,Pro_name)) #需修改
     if a[1] ==1: #ELCK
-         document1 =MailMerge(template0_ELB)
+         document1 =MailMerge(template1_ELCK)
          cust_1 = {'name': '1', #需修改读入
                    'time': '{:%B %d,%Y}'.format(date.today()),
-                   'pack_name': '{:%Y-%m-%d}'.format(date.today()),
+                   'pack_name': '',
                    'bianhao': '12342',
                    'custom_code': '123'
                    }
