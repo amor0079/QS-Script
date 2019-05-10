@@ -37,8 +37,8 @@ LANGS = (
         'ELFIL面膜核准单',
         'ELFIL面膜限度样品',
         'ELREF塑壳材料核准单',
-        'ELPCB线路板材料核准单',
-        'ELPF生产流程表'
+        'ELPCB线路板材料核准单'
+        # 'ELPF生产流程表'
         )
 v = [] #定义一个列表
 for long in LANGS:
@@ -86,8 +86,6 @@ def read_excel():
     in_pack = sheet1.cell(11, 1).value
     out_pack = sheet1.cell(11, 1).value
 
-# read_excel()
-#将选择添加进一个列表
 # a = []
 #定义主逻辑
 def show():
@@ -98,70 +96,69 @@ def show():
 
     #模板文档
     template0_ELB = r".\tem\ELB_template.docx"
-    template1_ELCK = r".\ELCK_template.docx"
+    template1_ELCK = r".\tem\ELCK_template.docx"
     template2_ELF = r".\tem\ELF_template.docx"
     template3_ELM = r".\tem\ELM_template.docx"
-    # #     # template4_ELN =
-    # #     # template5_ELP =
-    # #     # template6_ELQC =
-    # #     # template7_ELW =
+    # template4_ELN =
+    # template5_ELP =
+    # template6_ELQC =
+    # template7_ELW =
     template8_ELHC = r".\tem\ELHC_template.docx"
-    # #     # template9_ELSMT =
-    # #     # template10_ELT =
-    # #     # template11_ELY =
+    # template9_ELSMT =
+    # template10_ELT =
+    # template11_ELY =
     template12_FIL_H = r".\tem\ELFIL_film_h.docx"
     template13_FIL_X = r".\tem\ELFIL_film_x.docx"
     # template14_REF =
-    # #     # template15_PCB =
+    # template15_PCB =
     # #     # template16_ELPF =
-    #
-    #主判断逻辑
+
+
+    #主判断
     if a[0] ==1: #ELB
          document0 =MailMerge(template0_ELB)
          cust_1 = {'name': Pro_name,
                    'bianhao': str(tjp_num),
                    'custom_code': str(cus_num),
-                   'time': '{:%B %d,%Y}'.format(date.today()),
+                   'time': '{:%Y-%m-%d}'.format(date.today()),
                    'pack_name': str(in_pack),
                    }
          document0.merge_pages([cust_1])
-         # print(document.get_merge_fields()) 调试代码
-         document0.write("./ELB{}-{}.docx".format(tjp_num,Pro_name)) #需修改
+         document0.write("./ELB{}-{}.docx".format(tjp_num,Pro_name)) #需增加版本信息版本
+
     if a[1] ==1: #ELCK
          document1 =MailMerge(template1_ELCK)
-         cust_1 = {'name': '1', #需修改读入
-                   'time': '{:%B %d,%Y}'.format(date.today()),
-                   'pack_name': '',
-                   'bianhao': '12342',
-                   'custom_code': '123'
+         cust_1 = {'name': Pro_name,
+                   'bianhao': str(tjp_num),
+                   'P_name':pcb_name,
+                   'time': '{:%Y-%m-%d}'.format(date.today())
                    }
          document1.merge_pages([cust_1])
-         # print(document.get_merge_fields()) 调试代码
-         document1.write("./{}.docx".format(12)) #需修改
+         document1.write("./ELCK{}-{}.docx".format(tjp_num,Pro_name)) #需修改
+
     if a[2] ==1: #ELF
-         document1 =MailMerge(template0_ELB)
-         cust_1 = {'name': '1', #需修改读入
-                   'time': '{:%B %d,%Y}'.format(date.today()),
-                   'pack_name': '{:%Y-%m-%d}'.format(date.today()),
-                   'bianhao': '12342',
-                   'custom_code': '123'
+         document1 =MailMerge(template2_ELF)
+         cust_1 = {'name': Pro_name,
+                   'bianhao': str(tjp_num),
+                   'P_name': pcb_name,
+                   'R_name': ref_name,
+                   'time': '{:%Y-%m-%d}'.format(date.today()),
                    }
          document1.merge_pages([cust_1])
-         # print(document.get_merge_fields()) 调试代码
-         document1.write("./{}.docx".format(12)) #需修改
+         document1.write("./ELF{}-{}.docx".format(tjp_num,Pro_name)) #需修改
+
     if a[3] ==1: #ELM
-         document1 =MailMerge(template0_ELB)
-         cust_1 = {'name': '1', #需修改读入
-                   'time': '{:%B %d,%Y}'.format(date.today()),
-                   'pack_name': '{:%Y-%m-%d}'.format(date.today()),
-                   'bianhao': '12342',
-                   'custom_code': '123'
+         document1 =MailMerge(template3_ELM)
+         cust_1 = {'name': Pro_name,
+                   'bianhao': str(tjp_num),
+                   'F_name': film_name,
+                    'time': '{:%Y-%m-%d}'.format(date.today())
                    }
          document1.merge_pages([cust_1])
-         # print(document.get_merge_fields()) 调试代码
-         document1.write("./{}.docx".format(12)) #需修改
+         document1.write("./ELM{}-{}.docx".format(tjp_num,Pro_name)) #需修改
+
     if a[4] ==1: #ELN
-         document1 =MailMerge(template0_ELB)
+         document1 =MailMerge(template4_ELN)
          cust_1 = {'name': '1', #需修改读入
                    'time': '{:%B %d,%Y}'.format(date.today()),
                    'pack_name': '{:%Y-%m-%d}'.format(date.today()),
@@ -204,17 +201,17 @@ def show():
          document1.merge_pages([cust_1])
          # print(document.get_merge_fields()) 调试代码
          document1.write("./{}.docx".format(12)) #需修改
+
     if a[8] ==1: #ELHC
-         document1 =MailMerge(template0_ELB)
-         cust_1 = {'name': '1', #需修改读入
-                   'time': '{:%B %d,%Y}'.format(date.today()),
-                   'pack_name': '{:%Y-%m-%d}'.format(date.today()),
-                   'bianhao': '12342',
-                   'custom_code': '123'
+         document1 =MailMerge(template8_ELHC)
+         cust_1 = {'name': Pro_name,
+                   'bianhao': str(tjp_num),
+                   'custom_code': str(cus_num),
+                   'time': '{:%Y-%m-%d}'.format(date.today())
                    }
          document1.merge_pages([cust_1])
-         # print(document.get_merge_fields()) 调试代码
-         document1.write("./{}.docx".format(12)) #需修改
+         document1.write("./ELHC{}-{}.docx".format(tjp_num,Pro_name)) #需修改
+
     if a[9] ==1: #ELSMT
          document1 =MailMerge(template0_ELB)
          cust_1 = {'name': '1', #需修改读入
@@ -248,28 +245,28 @@ def show():
          document1.merge_pages([cust_1])
          # print(document.get_merge_fields()) 调试代码
          document1.write("./{}.docx".format(12)) #需修改
-    if a[12] ==1: #ELFIL_H
-         document1 =MailMerge(template0_ELB)
-         cust_1 = {'name': '1', #需修改读入
-                   'time': '{:%B %d,%Y}'.format(date.today()),
-                   'pack_name': '{:%Y-%m-%d}'.format(date.today()),
-                   'bianhao': '12342',
-                   'custom_code': '123'
+
+    if a[12] ==1: #ELFIL_H  缺少film_texture
+         document1 =MailMerge(template12_FIL_H)
+         cust_1 = {'name': Pro_name,
+                   'bianhao': str(tjp_num),
+                   'supper': film_sup,
+                   # 'texture':,
+                   'time': '{:%Y-%m-%d}'.format(date.today())
                    }
          document1.merge_pages([cust_1])
-         # print(document.get_merge_fields()) 调试代码
-         document1.write("./{}.docx".format(12)) #需修改
+         document1.write("./ELFIL{}面膜核准单({} {}).docx".format(tjp_num, pcb_sup, Pro_name))
+
     if a[13] ==1: #ELFIL_X
-         document1 =MailMerge(template0_ELB)
-         cust_1 = {'name': '1', #需修改读入
-                   'time': '{:%B %d,%Y}'.format(date.today()),
-                   'pack_name': '{:%Y-%m-%d}'.format(date.today()),
-                   'bianhao': '12342',
-                   'custom_code': '123'
+         document1 =MailMerge(template13_FIL_X)
+         cust_1 = {'name': Pro_name,
+                   'bianhao': str(tjp_num),
+                   'supper': film_sup,
+                   'time': '{:%Y-%m-%d}'.format(date.today())
                    }
          document1.merge_pages([cust_1])
-         # print(document.get_merge_fields()) 调试代码
-         document1.write("./{}.docx".format(12)) #需修改
+         document1.write("./ELFIL{}面膜限度样品({} {}).docx".format(tjp_num, pcb_sup, Pro_name))
+
     if a[14] ==1: #ELREF
          document1 =MailMerge(template0_ELB)
          cust_1 = {'name': '1', #需修改读入
@@ -292,16 +289,16 @@ def show():
          document1.merge_pages([cust_1])
          # print(document.get_merge_fields()) 调试代码
          document1.write("./{}.docx".format(12)) #需修改
-    if a[16] ==1: #ELPF
-         document1 =MailMerge(template0_ELB)
-         cust_1 = {'name': '1', #需修改读入
-                   'time': '{:%B %d,%Y}'.format(date.today()),
-                   'pack_name': '{:%Y-%m-%d}'.format(date.today()),
-                   'bianhao': '12342',
-                   'custom_code': '123'
-                   }
-         document1.merge_pages([cust_1])
-         document1.write("./{}.docx".format(12)) #需修改
+    # if a[16] ==1: #ELPF
+    #      document1 =MailMerge(template0_ELB)
+    #      cust_1 = {'name': '1', #需修改读入
+    #                'time': '{:%B %d,%Y}'.format(date.today()),
+    #                'pack_name': '{:%Y-%m-%d}'.format(date.today()),
+    #                'bianhao': '12342',
+    #                'custom_code': '123'
+    #                }
+    #      document1.merge_pages([cust_1])
+    #      document1.write("./{}.docx".format(12)) #需修改
 
 
 #Button setting
