@@ -104,14 +104,12 @@ def show():
     # template6_ELQC =
     # template7_ELW =
     template8_ELHC = r".\tem\ELHC_template.docx"
-    # template9_ELSMT =
-    # template10_ELT =
-    # template11_ELY =
+    # #     # template9_ELSMT =
+    # #     # template10_ELT =
+    # #     # template11_ELY =
     template12_FIL_H = r".\tem\ELFIL_film_h.docx"
     template13_FIL_X = r".\tem\ELFIL_film_x.docx"
-    # template14_REF =
-    # template15_PCB =
-    # #     # template16_ELPF =
+
 
 
     #主判断
@@ -131,7 +129,19 @@ def show():
          cust_1 = {'name': Pro_name,
                    'bianhao': str(tjp_num),
                    'P_name':pcb_name,
-                   'time': '{:%Y-%m-%d}'.format(date.today())
+                   'time': '{:%Y-%m-%d}'.format(date.today()),
+                   'pack_name': str(in_pack),
+                   }
+         document0.merge_pages([cust_1])
+         # print(document.get_merge_fields()) 调试代码
+         document0.write("./ELB{}-{}.docx".format(tjp_num,Pro_name)) #需修改
+    if a[1] ==1: #ELCK
+         document1 =MailMerge(template1_ELCK)
+         cust_1 = {'name': '1', #需修改读入
+                   'time': '{:%B %d,%Y}'.format(date.today()),
+                   'pack_name': '',
+                   'bianhao': '12342',
+                   'custom_code': '123'
                    }
          document1.merge_pages([cust_1])
          document1.write("./ELCK{}-{}.docx".format(tjp_num,Pro_name)) #需修改
