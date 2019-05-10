@@ -269,7 +269,7 @@ def show():
 
     if a[14] ==1: #ELREF
          document1 =MailMerge(template0_ELB)
-         cust_1 = {'name': '1', #需修改读入
+         cust_1 = {'name': '1', #需修改读入.
                    'time': '{:%B %d,%Y}'.format(date.today()),
                    'pack_name': '{:%Y-%m-%d}'.format(date.today()),
                    'bianhao': '12342',
