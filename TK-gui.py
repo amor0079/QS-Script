@@ -86,10 +86,18 @@ def read_excel():
     in_pack = sheet1.cell(11, 1).value
     out_pack = sheet1.cell(11, 1).value
 
+def new_folder():
+    path = r'./'
+    global new_folder_name
+    new_folder_name = path + str(Pro_name) + '生产条件票'
+    if not os.path.exists(new_folder_name):
+        os.mkdir(new_folder_name)
+
 # a = []
 #定义主逻辑
 def show():
     read_excel()
+    new_folder()
     a =[]
     for var in v:
         a.append(var.get())
@@ -122,7 +130,7 @@ def show():
                    'pack_name': str(in_pack),
                    }
          document0.merge_pages([cust_1])
-         document0.write("./ELB{}-{}.docx".format(tjp_num,Pro_name)) #需增加版本信息版本
+         document0.write("./{}/ELB{}-{}.docx".format(new_folder_name, tjp_num,Pro_name)) #需增加版本信息版本
 
     if a[1] ==1: #ELCK
          document1 =MailMerge(template1_ELCK)
@@ -133,7 +141,7 @@ def show():
                    'pack_name': str(in_pack),
                    }
          document1.merge_pages([cust_1])
-         document1.write("./ELB{}-{}.docx".format(tjp_num,Pro_name)) #需修改
+         document1.write("./{}/ELB{}-{}.docx".format(new_folder_name,tjp_num,Pro_name)) #需修改
 
     if a[2] ==1: #ELF
          document2 =MailMerge(template2_ELF)
@@ -144,7 +152,7 @@ def show():
                    'time': '{:%Y-%m-%d}'.format(date.today()),
                    }
          document2.merge_pages([cust_1])
-         document2.write("./ELF{}-{}.docx".format(tjp_num,Pro_name)) #需修改
+         document2.write("./{}/ELF{}-{}.docx".format(new_folder_name,tjp_num,Pro_name)) #需修改
 
     if a[3] ==1: #ELM
          document3 =MailMerge(template3_ELM)
@@ -154,7 +162,7 @@ def show():
                    'time': '{:%Y-%m-%d}'.format(date.today())
                    }
          document3.merge_pages([cust_1])
-         document3.write("./ELM{}-{}.docx".format(tjp_num,Pro_name)) #需修改
+         document3.write("./{}/ELM{}-{}.docx".format(new_folder_name,tjp_num,Pro_name)) #需修改
 
     if a[4] ==1: #ELN
          document4 =MailMerge(template4_ELN)
@@ -164,7 +172,7 @@ def show():
                    'time': '{:%Y-%m-%d}'.format(date.today())
                    }
          document4.merge_pages([cust_1])
-         document4.write("./ELN{}-{}.docx".format(tjp_num,Pro_name)) #需修改
+         document4.write("./{}/ELN{}-{}.docx".format(new_folder_name, tjp_num,Pro_name)) #需修改
 
     if a[5] ==1: #ELP
          document5 =MailMerge(template5_ELP)
@@ -174,7 +182,7 @@ def show():
                    'time': '{:%Y-%m-%d}'.format(date.today())
                    }
          document5.merge_pages([cust_1])
-         document5.write("./ELP{}-{}.docx".format(tjp_num,Pro_name))
+         document5.write("./{}/ELP{}-{}.docx".format(new_folder_name, tjp_num,Pro_name))
 
     if a[6] ==1: #ELQC
          document6 =MailMerge(template6_ELQC)
@@ -183,7 +191,7 @@ def show():
                    'time': '{:%Y-%m-%d}'.format(date.today())
                    }
          document6.merge_pages([cust_1])
-         document6.write("./ELQC{}-{}.docx".format(tjp_num,Pro_name)) #需修改
+         document6.write("./{}/ELQC{}-{}.docx".format(new_folder_name, tjp_num,Pro_name)) #需修改
 
     if a[7] ==1: #ELW
          document7 =MailMerge(template7_ELW)
@@ -207,7 +215,7 @@ def show():
                    'time': '{:%Y-%m-%d}'.format(date.today())
                    }
          document7.merge_pages([cust_1])
-         document7.write("./ELW{}-{}.docx".format(tjp_num,Pro_name)) #需修改
+         document7.write("./{}/ELW{}-{}.docx".format(new_folder_name, tjp_num,Pro_name)) #需修改
 
     if a[8] ==1: #ELHC
          document8 =MailMerge(template8_ELHC)
@@ -217,7 +225,7 @@ def show():
                    'time': '{:%Y-%m-%d}'.format(date.today())
                    }
          document8.merge_pages([cust_1])
-         document8.write("./ELHC{}-{}.docx".format(tjp_num,Pro_name)) #需修改
+         document8.write("./{}/ELHC{}-{}.docx".format(new_folder_name, tjp_num,Pro_name)) #需修改
 
     if a[9] ==1: #ELSMT
          document9 =MailMerge(template9_ELSMT)
@@ -228,7 +236,7 @@ def show():
                    'time': '{:%Y-%m-%d}'.format(date.today())
                    }
          document9.merge_pages([cust_1])
-         document9.write("./ELSMT{}-{}SMT加工技术文件.docx".format(tjp_num,Pro_name)) #需修改
+         document9.write("./{}/ELSMT{}-{}SMT加工技术文件.docx".format(new_folder_name, tjp_num,Pro_name)) #需修改
 
     if a[10] ==1: #ELT
          document10 =MailMerge(template10_ELT)
@@ -238,7 +246,7 @@ def show():
                    'time': '{:%Y-%m-%d}'.format(date.today())
                    }
          document10.merge_pages([cust_1])
-         document10.write("./ELT{}-{}.docx".format(tjp_num,Pro_name))
+         document10.write("./{}/ELT{}-{}.docx".format(new_folder_name, tjp_num,Pro_name))
 
     if a[11] ==1: #ELY
          document11 =MailMerge(template11_ELY)
@@ -249,7 +257,7 @@ def show():
                    'time': '{:%Y-%m-%d}'.format(date.today())
                    }
          document11.merge_pages([cust_1])
-         document11.write("./ELY{}-{}.docx".format(tjp_num,Pro_name))
+         document11.write("./{}/ELY{}-{}.docx".format(new_folder_name, tjp_num,Pro_name))
 
     if a[12] ==1: #ELFIL_H  缺少film_texture
          document12 =MailMerge(template12_FIL_H)
@@ -260,7 +268,7 @@ def show():
                    'time': '{:%Y-%m-%d}'.format(date.today())
                    }
          document12.merge_pages([cust_1])
-         document12.write("./ELFIL{}面膜核准单({} {}).docx".format(tjp_num, film_sup, Pro_name))
+         document12.write("./{}/ELFIL{}面膜核准单({} {}).docx".format(new_folder_name, tjp_num, film_sup, Pro_name))
 
     if a[13] ==1: #ELFIL_X
          document13 =MailMerge(template13_FIL_X)
@@ -270,7 +278,7 @@ def show():
                    'time': '{:%Y-%m-%d}'.format(date.today())
                    }
          document13.merge_pages([cust_1])
-         document13.write("./ELFIL{}面膜限度样品({} {}).docx".format(tjp_num, film_sup, Pro_name))
+         document13.write("./{}/ELFIL{}面膜限度样品({} {}).docx".format(new_folder_name, tjp_num, film_sup, Pro_name))
 
     if a[14] ==1: #ELREF
          document14 =MailMerge(template14_ELREF)
@@ -283,7 +291,7 @@ def show():
                    'time': '{:%Y-%m-%d}'.format(date.today()),
                    }
          document14.merge_pages([cust_1])
-         document14.write("./ELREF{}塑壳材料核准单({}-{}).docx".format(tjp_num,ref_sup,ref_name))
+         document14.write("./{}/ELREF{}塑壳材料核准单({}-{}).docx".format(new_folder_name, tjp_num,ref_sup,ref_name))
 
     if a[15] ==1: #ELPCB
          document15 =MailMerge(template15_ELPCB)
@@ -294,7 +302,7 @@ def show():
                    'pcb_sup': pcb_sup
                    }
          document15.merge_pages([cust_1])
-         document15.write("./ELPCB{}线路板材料核准单({}-{}).docx".format(tjp_num,pcb_sup,pcb_name))
+         document15.write("./{}/ELPCB{}线路板材料核准单({}-{}).docx".format(new_folder_name, tjp_num,pcb_sup,pcb_name))
 
     # if a[16] ==1: #ELPF
     #      document1 =MailMerge(template0_ELB)
