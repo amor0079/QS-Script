@@ -62,8 +62,8 @@ excel_path = r'.\ID_table.xlsx' #程序与数据分离
 def read_excel():
     workbook = xlrd.open_workbook(excel_path)
     sheet1= workbook.sheet_by_name(u'Sheet1')
-    nrows = sheet1.nrows
-    ncols = sheet1.ncols
+    # nrows = sheet1.nrows
+    # ncols = sheet1.ncols
     global Pro_name,tjp_num,cus_num,ref_name,ref_ink,ref_sup,ref_texture,pcb_name,\
            pcb_sup,pin_name,pin_head,pin_head,film_name,film_sup,chip_name,easy_tape,\
            easy_sup,in_pack,out_pack
@@ -92,6 +92,9 @@ def new_folder():
     new_folder_name = path + str(Pro_name) + '生产条件票'
     if not os.path.exists(new_folder_name):
         os.mkdir(new_folder_name)
+
+def message():
+    messagebox.showinfo(title= 'Congratulation', message='条件票创建成功')
 
 # a = []
 #定义主逻辑
@@ -314,7 +317,7 @@ def show():
     #                }
     #      document1.merge_pages([cust_1])
     #      document1.write("./{}.docx".format(12)) #需修改
-
+    message()
 
 #Button setting
 Button(root, text = "确认输出文档", width = 10, command = show)\
