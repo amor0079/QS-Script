@@ -20,7 +20,7 @@ chip_Inf = {
     'R': ('R', 'Red', 'GaP/GaP', 2.0, 2.7, 640, 90),
     'S': ('S', 'Super Bright Red', 'AlGaAs/GaAs', 2.0, 2.5, 640, 20),
     'D': ('S', 'Super Bright Red', 'AlGaAs/GaAs', 2.0, 2.5, 640, 20),
-    'W': ('W', 'Super Bright', 'AlGalnP/GaAs', 2.0, 2.5, 630, 20),
+    'W': ('W', 'Super Bright Red', 'AlGalnP/GaAs', 2.0, 2.5, 630, 20),
     'E': ('E', 'Orange', 'GaAsP/GaP', 2.2, 2.7, 620, 35),
     'Q': ('Q', 'Super Bright Orange', 'AlGalnP/GaAs', 2.0, 2.5, 625, 20),
     'B': ('B', 'Super Bright Blue', 'InGaN/GaN', 3.5, 4.0, 468, 25),
@@ -32,11 +32,13 @@ chip_Inf = {
 
 #筛选晶片函数
 def name_resolution():
-    global chip, chip_len, polarity, tem_choice, ink_choice
+    global chip, chip_len, polarity, tem_choice, ink_choice, inch_choice
     a1 = e1.get() #获取输入
     tem_choice = a1.split('-')[0][-1] #依据最后一位来选择模板
 
     ink_choice = a1.split('-')[2][0] #依据第三段第一位来判断油墨颜色。
+
+    inch_choice = a1.split('-')[1][1] #提取第二段第二位
 
     colour_len_split = a1.split('-')[1] #使用split函数分隔输入信息
     chip = re.sub('[^a-zA-Z]', '', colour_len_split)
@@ -82,6 +84,19 @@ def ink(): #判断油墨颜色
         ref_ink = 'gray'
     return ref_ink
 
+def power():  #增加功率参数
+    global pw
+    pw = int(float(co1_VF_m) * 20)
+    return pw
+
+def inch():
+    global inc, millimeter
+    inc = '0.{}'.format(inch_choice)
+    millimeter = str(int(inch_choice)/10 * 25.4)
+    return inc, millimeter
+
+
+
 #选择模板函数
 def choice_tem():
     #模板清单
@@ -97,6 +112,8 @@ def choice_tem():
     sin_mul() #判断晶片单复数。
     jx() #判断晶片极性
     ink() #判断塑壳油墨
+    power() #判断功率
+    inch() #赋值尺寸 英寸
     up_sm_colour = sm_colour.upper() #颜色大写
     up_colour1 = co1.upper()
 
@@ -119,7 +136,10 @@ def choice_tem():
                   'vfm': str(co1_VF_m),
                   'bo': str(co1_bo),
                   'bbo': str(co1_bbo),
-                  'upcolour1': up_colour1
+                  'upcolour1': up_colour1,
+                  'power':str(pw),
+                  'inc':inc,
+                  'milli': millimeter
                   }
         document.merge_pages([cust_1])
         document.write("./{}.docx".format(e1.get()))
@@ -129,14 +149,21 @@ def choice_tem():
         cust_1 = {'name': e1.get(),
                   'date1': '{:%B %d,%Y}'.format(date.today()),
                   'date2': '{:%Y-%m-%d}'.format(date.today()),
-                  'spec_no': e2.get(),
-                  'engineer': e3.get(),
-                  'wide': e4.get(),
-                  'length': e5.get(),
+                  'spec_no': str(e2.get()),
+                  'engineer': str(e3.get()),
+                  'wide': str(e4.get()),
+                  'length': str(e5.get()),
                   'n_colour': sm_colour,
                   'up_sm_colour': up_sm_colour,
                   'jixing': jixing,
-                  # 'colour_1':co1,
+                  'colour_1':co1,
+                  'element' : co1_ele,
+                  'ink': ref_ink,
+                  'vft': str(co1_VF_t),
+                  'vfm': str(co1_VF_m),
+                  'bo': str(co1_bo),
+                  'bbo': str(co1_bbo),
+                  'upcolour1': up_colour1
                   }
         document.merge_pages([cust_1])
         document.write("./{}.docx".format(e1.get()))
