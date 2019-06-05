@@ -32,13 +32,15 @@ chip_Inf = {
 
 #筛选晶片函数
 def name_resolution():
-    global chip, chip_len, polarity, tem_choice, ink_choice, inch_choice
+    global chip, chip_len, polarity, tem_choice, ink_choice, inch_choice, cob_led
     a1 = e1.get() #获取输入
     tem_choice = a1.split('-')[0][-1] #依据最后一位来选择模板
 
     ink_choice = a1.split('-')[2][0] #依据第三段第一位来判断油墨颜色。
 
-    inch_choice = a1.split('-')[1][1] #提取第二段第二位
+    inch_choice = a1.split('-')[1][1] #提取第二段第二位判断油墨颜色
+
+    cob_led = a1.split('-')[2][1] # 提取第三段第二位判断空封还是石封
 
     colour_len_split = a1.split('-')[1] #使用split函数分隔输入信息
     chip = re.sub('[^a-zA-Z]', '', colour_len_split)
@@ -79,9 +81,13 @@ def message():
 def ink(): #判断油墨颜色
     global ref_ink
     if ink_choice == '2':
-        ref_ink = 'black'
+        ref_ink = 'black ink'
     elif ink_choice == '1':
-        ref_ink = 'gray'
+        ref_ink = 'gray ink'
+    elif ink_choice == '4':
+        ref_ink = 'a black pattern film'
+    else:
+        ref_ink = ''
     return ref_ink
 
 def power():  #增加功率参数
@@ -89,11 +95,22 @@ def power():  #增加功率参数
     pw = int(float(co1_VF_m) * 20)
     return pw
 
-def inch():
+def inch(): #尺寸赋值
     global inc, millimeter
     inc = '0.{}'.format(inch_choice)
     millimeter = str(int(inch_choice)/10 * 25.4)
     return inc, millimeter
+
+def cob(): #ZDP 判断是否是实封还是空封
+    global  cob_chip
+    if cob_led == '1':
+        cob_chip = 'epoxy-molding'
+    elif cob_led == '0':
+        cob_chip = 'air-type'
+    else:
+        cob_chip = ''
+    return cob_chip
+
 
 
 
@@ -114,6 +131,7 @@ def choice_tem():
     ink() #判断塑壳油墨
     power() #判断功率
     inch() #赋值尺寸 英寸
+    cob() #赋值空封实封
     up_sm_colour = sm_colour.upper() #颜色大写
     up_colour1 = co1.upper()
 
@@ -124,8 +142,6 @@ def choice_tem():
                   'date2': '{:%Y-%m-%d}'.format(date.today()),
                   'spec_no': str(e2.get()),
                   'engineer': str(e3.get()),
-                  'wide': str(e4.get()),
-                  'length': str(e5.get()),
                   'n_colour': sm_colour,
                   'up_sm_colour': up_sm_colour,
                   'jixing': jixing,
@@ -151,8 +167,6 @@ def choice_tem():
                   'date2': '{:%Y-%m-%d}'.format(date.today()),
                   'spec_no': str(e2.get()),
                   'engineer': str(e3.get()),
-                  'wide': str(e4.get()),
-                  'length': str(e5.get()),
                   'n_colour': sm_colour,
                   'up_sm_colour': up_sm_colour,
                   'jixing': jixing,
@@ -163,7 +177,10 @@ def choice_tem():
                   'vfm': str(co1_VF_m),
                   'bo': str(co1_bo),
                   'bbo': str(co1_bbo),
-                  'upcolour1': up_colour1
+                  'upcolour1': up_colour1,
+                  'power': str(pw),
+                  'inc': inc,
+                  'milli': millimeter
                   }
         document.merge_pages([cust_1])
         document.write("./{}.docx".format(e1.get()))
@@ -173,14 +190,22 @@ def choice_tem():
         cust_1 = {'name': e1.get(),
                   'date1': '{:%B %d,%Y}'.format(date.today()),
                   'date2': '{:%Y-%m-%d}'.format(date.today()),
-                  'spec_no': e2.get(),
-                  'engineer': e3.get(),
-                  'wide': e4.get(),
-                  'length': e5.get(),
+                  'spec_no': str(e2.get()),
+                  'engineer': str(e3.get()),
                   'n_colour': sm_colour,
                   'up_sm_colour': up_sm_colour,
                   'jixing': jixing,
-                  # 'colour_1':co1,
+                  'colour_1':co1,
+                  'element' : co1_ele,
+                  'ink': ref_ink,
+                  'vft': str(co1_VF_t),
+                  'vfm': str(co1_VF_m),
+                  'bo': str(co1_bo),
+                  'bbo': str(co1_bbo),
+                  'upcolour1': up_colour1,
+                  'power': str(pw),
+                  'inc': inc,
+                  'milli': millimeter
                   }
         document.merge_pages([cust_1])
         document.write("./{}.docx".format(e1.get()))
@@ -190,14 +215,22 @@ def choice_tem():
         cust_1 = {'name': e1.get(),
                   'date1': '{:%B %d,%Y}'.format(date.today()),
                   'date2': '{:%Y-%m-%d}'.format(date.today()),
-                  'spec_no': e2.get(),
-                  'engineer': e3.get(),
-                  'wide': e4.get(),
-                  'length': e5.get(),
+                  'spec_no': str(e2.get()),
+                  'engineer': str(e3.get()),
                   'n_colour': sm_colour,
                   'up_sm_colour': up_sm_colour,
                   'jixing': jixing,
-                  # 'colour_1':co1,
+                  'colour_1':co1,
+                  'element' : co1_ele,
+                  'ink': ref_ink,
+                  'vft': str(co1_VF_t),
+                  'vfm': str(co1_VF_m),
+                  'bo': str(co1_bo),
+                  'bbo': str(co1_bbo),
+                  'upcolour1': up_colour1,
+                  'power': str(pw),
+                  'inc': inc,
+                  'milli': millimeter
                   }
         document.merge_pages([cust_1])
         document.write("./{}.docx".format(e1.get()))
@@ -211,10 +244,19 @@ def choice_tem():
                   'engineer': e3.get(),
                   'wide': e4.get(),
                   'length': e5.get(),
+                  'colour_1': co1,
                   'n_colour': sm_colour,
                   'up_sm_colour': up_sm_colour,
                   'jixing': jixing,
-                  # 'colour_1':co1,
+                  'cob_chip':cob_chip,
+                  'element' : co1_ele,
+                  'ink': ref_ink,
+                  'vft': str(co1_VF_t),
+                  'vfm': str(co1_VF_m),
+                  'bo': str(co1_bo),
+                  'bbo': str(co1_bbo),
+                  'upcolour1': up_colour1,
+                  'power': str(pw)
                   }
         document.merge_pages([cust_1])
         document.write("./{}.docx".format(e1.get()))
@@ -273,7 +315,10 @@ def choice_tem():
     #需要加入try except
 
 def colour(): #判断颜色个数赋值晶片参数
-    global co1, co2, co3, co4, co1_ele, co1_VF_m, co1_VF_t, co1_bo, co1_bbo
+    global co1, co1_ele, co1_VF_m, co1_VF_t, co1_bo, co1_bbo,\
+           co2, co2_ele, co2_VF_m, co2_VF_t, co2_bo, co2_bbo,\
+           co3, co3_ele, co3_VF_m, co3_VF_t, co3_bo, co3_bbo, \
+           co4, co4_ele, co4_VF_m, co4_VF_t, co4_bo, co4_bbo
     if chip_len == 1:
         co1 = choice_chip_inf[0][1]
         co1_ele = choice_chip_inf[0][2]
@@ -283,16 +328,67 @@ def colour(): #判断颜色个数赋值晶片参数
         co1_bbo = choice_chip_inf[0][6]#晶片其他参数
     elif chip_len == 2:
         co1 = choice_chip_inf[0][1]
+        co1_ele = choice_chip_inf[0][2]
+        co1_VF_t = choice_chip_inf[0][3]
+        co1_VF_m = choice_chip_inf[0][4]
+        co1_bo = choice_chip_inf[0][5]
+        co1_bbo = choice_chip_inf[0][6]
         co2 = choice_chip_inf[1][1]
+        co2_ele = choice_chip_inf[1][2]
+        co2_VF_t = choice_chip_inf[1][3]
+        co2_VF_m = choice_chip_inf[1][4]
+        co2_bo = choice_chip_inf[1][5]
+        co2_bbo = choice_chip_inf[1][6]
     elif chip_len == 3:
         co1 = choice_chip_inf[0][1]
+        co1_ele = choice_chip_inf[0][2]
+        co1_VF_t = choice_chip_inf[0][3]
+        co1_VF_m = choice_chip_inf[0][4]
+        co1_bo = choice_chip_inf[0][5]
+        co1_bbo = choice_chip_inf[0][6]
         co2 = choice_chip_inf[1][1]
+        co2_ele = choice_chip_inf[1][2]
+        co2_VF_t = choice_chip_inf[1][3]
+        co2_VF_m = choice_chip_inf[1][4]
+        co2_bo = choice_chip_inf[1][5]
+        co2_bbo = choice_chip_inf[1][6]
         co3 = choice_chip_inf[2][1]
+        co3_ele = choice_chip_inf[2][2]
+        co3_VF_t = choice_chip_inf[2][3]
+        co3_VF_m = choice_chip_inf[2][4]
+        co3_bo = choice_chip_inf[2][5]
+        co3_bbo = choice_chip_inf[2][6]
     elif chip_len == 4:
         co1 = choice_chip_inf[0][1]
+        co1_ele = choice_chip_inf[0][2]
+        co1_VF_t = choice_chip_inf[0][3]
+        co1_VF_m = choice_chip_inf[0][4]
+        co1_bo = choice_chip_inf[0][5]
+        co1_bbo = choice_chip_inf[0][6]
         co2 = choice_chip_inf[1][1]
+        co2_ele = choice_chip_inf[1][2]
+        co2_VF_t = choice_chip_inf[1][3]
+        co2_VF_m = choice_chip_inf[1][4]
+        co2_bo = choice_chip_inf[1][5]
+        co2_bbo = choice_chip_inf[1][6]
         co3 = choice_chip_inf[2][1]
+        co3_ele = choice_chip_inf[2][2]
+        co3_VF_t = choice_chip_inf[2][3]
+        co3_VF_m = choice_chip_inf[2][4]
+        co3_bo = choice_chip_inf[2][5]
+        co3_bbo = choice_chip_inf[2][6]
         co4 = choice_chip_inf[3][1]
+        co4_ele = choice_chip_inf[3][2]
+        co4_VF_t = choice_chip_inf[3][3]
+        co4_VF_m = choice_chip_inf[3][4]
+        co4_bo = choice_chip_inf[3][5]
+        co4_bbo = choice_chip_inf[3][6]
+    else:
+        pass
+    return co1, co1_ele, co1_VF_m, co1_VF_t, co1_bo, co1_bbo,\
+           co2, co2_ele, co2_VF_m, co2_VF_t, co2_bo, co2_bbo,\
+           co3, co3_ele, co3_VF_m, co3_VF_t, co3_bo, co3_bbo, \
+           co4, co4_ele, co4_VF_m, co4_VF_t, co4_bo, co4_bbo
     #需要加入try except
 
 
